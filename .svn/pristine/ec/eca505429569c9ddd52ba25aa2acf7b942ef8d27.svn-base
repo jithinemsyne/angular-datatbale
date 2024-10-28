@@ -1,0 +1,118 @@
+import { Component } from '@angular/core';
+import { employeeTableColumns } from './constants/table-columns';
+import { IListTableColumns, IListTableConfig } from './components/list-table/list-table.interface';
+import { employeeTableConfig } from './constants/table-config';
+import { EmployeeService } from './services/employee.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+
+  employeeTableData: any[] = [];
+  employeeTableColumns: IListTableColumns[] = employeeTableColumns;
+  employeeTableConfig: IListTableConfig = employeeTableConfig;
+  currentPageNumber: number = 1;
+  pageSize!: number;
+  checkedRows: any[] = [];
+
+  constructor(private _employeeService: EmployeeService) { }
+
+  ngOnInit(): void {
+    this.pageSize = employeeTableConfig?.pagination?.pageSize ? employeeTableConfig.pagination.pageSize : 10; 
+    this.getTableData(this.currentPageNumber, this.pageSize);
+  }
+
+  /**
+   *
+   * @author Pradeep V
+   * @param {number} pageSize
+   * @param {number} pageOffset
+   * @memberof AppComponent
+   * @description Simulates an API call, and retrieves a sample table data after a small delay
+   */
+  getTableData(pageNumber: number, pageSize: number) {
+    this._employeeService.getEmployeeList(pageNumber, pageSize).subscribe((response: any) => {
+      this.employeeTableData = response.data;
+      this.employeeTableConfig!.pagination!.maxPageIndex = response.maxPageNumber;
+      this.employeeTableConfig!.pagination!.pageSize = pageSize;
+    })
+  }
+
+
+  /**
+   *
+   * @author Pradeep V
+   * @param {*} deletedRow
+   * @memberof AppComponent
+   * @description Deletes the emitted row from the data array
+   */
+  handleDeleteRow(deletedRow: any) {
+    this.employeeTableData = this.employeeTableData.filter(x => (x.id !== deletedRow.id));
+    if (this.employeeTableData.length === 0 && this.currentPageNumber > 1) {
+      this.currentPageNumber--;
+      this.getTableData(this.currentPageNumber, this.pageSize);
+    }
+  }
+
+  /**
+   *
+   * @author Pradeep V
+   * @param {number} pageNumber
+   * @memberof AppComponent
+   * @description Handles previous page click event
+   */
+  handlePreviousPageClick(pageNumber: number) {
+    this.currentPageNumber = pageNumber;
+    this.getTableData(this.currentPageNumber, this.pageSize);
+  }
+
+  /**
+   *
+   * @author Pradeep V
+   * @param {number} pageNumber
+   * @memberof AppComponent
+   * @description Handles next page click event
+   */
+  handleNextPageClick(pageNumber: number) {
+    this.currentPageNumber = pageNumber;
+    this.getTableData(this.currentPageNumber, this.pageSize);
+  }
+
+  /**
+   *
+   * @author Pradeep V
+   * @param {number} pageNumber
+   * @memberof AppComponent
+   * @description Handles go to a specific page click event
+   */
+  handleGoToPage(pageNumber: number) {
+    this.currentPageNumber = pageNumber;
+    this.getTableData(this.currentPageNumber, this.pageSize);
+  }
+
+  onPageSizeChange(event: number) {
+    this.pageSize = event;
+    this.currentPageNumber = 1;
+    this.getTableData(this.currentPageNumber, this.pageSize);
+  }
+
+  /**
+   *
+   * @author Pradeep V
+   * @param {*} checkedEvent
+   * @memberof AppComponent
+   * @description Handles checked row event
+   */
+  handleCheckedRow(checkedRowsEvent: any) {
+    this.checkedRows = [];
+    checkedRowsEvent.forEach((row: any) => {
+      const index = this.checkedRows.findIndex(x => x.id === row.id);
+      if (index === -1) {
+        this.checkedRows.push(row);
+      }
+    });
+  }
+}

@@ -1,0 +1,191 @@
+import { Injectable } from '@angular/core';
+import { Observable, delay, of } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class EmployeeService {
+
+  constructor() { }
+
+  employeeDetails = [
+    {
+      id: '001',
+      name: 'Pradeep V',
+      designation: 'Engineer',
+      dropdown: 'active',
+      fromDate: { year: 2020, month: 10, day: 9 },
+      toDate: { year: 2024, month: 10, day: 9 }
+    },
+    {
+      id: '002',
+      name: 'Kelly Rons',
+      designation: 'Manager',
+      dropdown: 'active',
+      fromDate: { year: 2021, month: 2, day: 9 },
+      toDate: { year: 2024, month: 10, day: 9 }
+    },
+    {
+      id: '003',
+      name: 'John Adams',
+      designation: 'Assistant Engineer',
+      dropdown: 'active',
+      fromDate: { year: 2024, month: 10, day: 9 },
+      toDate: { year: 2025, month: 5, day: 9 }
+    },
+    {
+      id: '004',
+      name: 'Mark Marques',
+      designation: 'Senior Engineer',
+      dropdown: 'active',
+      fromDate: { year: 2024, month: 10, day: 19 },
+      toDate: { year: 2026, month: 12, day: 7 }
+    },
+    {
+      id: '005',
+      name: 'Von Wang',
+      designation: 'Senior Architect',
+      dropdown: 'active',
+      fromDate: { year: 2024, month: 10, day: 4 },
+      toDate: { year: 2029, month: 10, day: 27 }
+    },
+    {
+      id: '006',
+      name: 'Jill Biden',
+      designation: 'Architect',
+      dropdown: 'active',
+      fromDate: { year: 2018, month: 3, day: 14 },
+      toDate: { year: 2019, month: 10, day: 18 }
+    },
+    {
+      id: '007',
+      name: 'Martin King',
+      designation: 'HR Manager',
+      dropdown: 'active',
+      fromDate: { year: 2024, month: 10, day: 9 },
+      toDate: { year: 2024, month: 10, day: 9 }
+    },
+    {
+      id: '008',
+      name: 'Aaron Jane',
+      designation: 'General Manager',
+      dropdown: 'active',
+      fromDate: { year: 2024, month: 10, day: 9 },
+      toDate: { year: 2024, month: 10, day: 9 }
+    },
+    {
+      id: '009',
+      name: 'Lucy France',
+      designation: 'HR Assistant',
+      dropdown: 'active',
+      fromDate: { year: 2024, month: 10, day: 9 },
+      toDate: { year: 2024, month: 10, day: 9 }
+    },
+    {
+      id: '010',
+      name: 'Linda Hentry',
+      designation: 'Engineer',
+      dropdown: 'active',
+      fromDate: { year: 2024, month: 10, day: 9 },
+      toDate: { year: 2024, month: 10, day: 9 }
+    },
+    {
+      id: '011',
+      name: 'Lill May',
+      designation: 'HR Assistant',
+      dropdown: 'active',
+      fromDate: { year: 2024, month: 10, day: 9 },
+      toDate: { year: 2024, month: 10, day: 9 }
+    },
+    {
+      id: '012',
+      name: 'Harry Field',
+      designation: 'Sales Executive',
+      dropdown: 'active',
+      fromDate: { year: 2024, month: 10, day: 9 },
+      toDate: { year: 2024, month: 10, day: 9 }
+    },
+    {
+      id: '013',
+      name: 'Jacob Swan',
+      designation: 'Warehouse Manger',
+      dropdown: 'active',
+      fromDate: { year: 2024, month: 10, day: 9 },
+      toDate: { year: 2024, month: 10, day: 9 }
+    },
+    {
+      id: '014',
+      name: 'Jeremy Oile',
+      designation: 'HR Executive',
+      dropdown: 'active',
+      fromDate: { year: 2022, month: 11, day: 9 },
+      toDate: { year: 2023, month: 10, day: 9 }
+    },
+    {
+      id: '015',
+      name: 'Jeremy Oile',
+      designation: 'HR Executive',
+      dropdown: 'active',
+      fromDate: { year: 2022, month: 11, day: 9 },
+      toDate: { year: 2023, month: 10, day: 9 }
+    },
+    {
+      id: '016',
+      name: 'Shang Chi',
+      designation: 'HR Manager',
+      dropdown: 'active',
+      fromDate: { year: 2022, month: 11, day: 9 },
+      toDate: { year: 2023, month: 10, day: 9 }
+    },
+    {
+      id: '017',
+      name: 'Lince Pratt',
+      designation: 'Production Executive',
+      dropdown: 'active',
+      fromDate: { year: 2022, month: 11, day: 9 },
+      toDate: { year: 2023, month: 10, day: 9 }
+    },
+    {
+      id: '018',
+      name: 'Cleave Rich',
+      designation: 'HR Executive',
+      dropdown: 'active',
+      fromDate: { year: 2022, month: 11, day: 9 },
+      toDate: { year: 2023, month: 10, day: 9 }
+    },
+    {
+      id: '019',
+      name: 'Darek Mann',
+      designation: 'HR Apprendice',
+      dropdown: 'active',
+      fromDate: { year: 2022, month: 11, day: 9 },
+      toDate: { year: 2023, month: 10, day: 9 }
+    },
+    {
+      id: '020',
+      name: 'Mark Wins',
+      designation: 'General Executive',
+      dropdown: 'active',
+      fromDate: { year: 2022, month: 11, day: 9 },
+      toDate: { year: 2023, month: 10, day: 9 }
+    },
+    {
+      id: '021',
+      name: 'Oil David',
+      designation: 'Assistant Manager',
+      dropdown: 'active',
+      fromDate: { year: 2022, month: 11, day: 9 },
+      toDate: { year: 2023, month: 10, day: 9 }
+    },
+  ]
+
+  getEmployeeList(pageNumber: number, pageSize: number): Observable<any> {
+    // Backend API Logic is implemented here.
+    const resultArray = {
+      data: this.employeeDetails.slice((pageNumber * pageSize) - pageSize, pageNumber * pageSize),
+      maxPageNumber: Math.ceil(this.employeeDetails.length / pageSize),
+      totalRecords: this.employeeDetails.length
+    };
+    return of(resultArray).pipe(delay(200));
+  }
+}

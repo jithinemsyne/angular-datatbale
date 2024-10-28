@@ -1,0 +1,250 @@
+/* General table styles */
+table {
+  width: 100%;
+  box-shadow: 0px 0px 10px 3px #cfcfcf;
+}
+
+table,
+tr {
+  border-bottom: 1px solid #dadeff;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid #dadeff;
+  padding: 10px;
+}
+
+tr {
+  background-color: white;
+  transition: background-color 300ms ease;
+}
+
+th {
+  text-align: left;
+  color: #212529;
+  font-size: 13px;
+  font-family: roboto, sans-serif;
+  background-color: #e7f4ff;
+}
+
+.table-footer {
+  background-color: #e7f4ff;
+}
+
+table tr:nth-child(odd) {
+  background: #fbfbfb;
+}
+
+table tr:nth-child(even) {
+  background: #ffff;
+}
+
+.no-data-found {
+  color: #8A96A3;
+}
+
+.table-header {
+  color: white;
+  background-color: #4747a1;
+  font-size: 0.923rem;
+  font-family: roboto, sans-serif;
+  border-radius: 3px;
+  padding: 8px;
+}
+
+.align-middle {
+  margin: auto 0;
+  padding-left: 5px;
+}
+
+.footer {
+  background-color: #e7f4ff;
+}
+
+.no-gap {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.hover-highlight:hover {
+  background-color: #f0f0f0;
+  transition: background-color 300ms ease;
+}
+
+/* Pagination styles */
+#entriesPerPage {
+  border: 1px solid #ccc;
+  text-align: center;
+  border-radius: 3px;
+  height: 25px;
+}
+
+.page-number {
+  margin: 0;
+  width: 50px;
+  text-align: center;
+  border: 1px solid #cfcfcf;
+  outline: none;
+  transition: border 300ms ease;
+  border-radius: 3px;
+  height: 25px;
+}
+
+.buttonb {
+  border: none;
+  background-color: transparent;
+  position: relative;
+}
+
+/* Checkbox styles */
+.primary-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cfcfcf;
+  border-radius: 2px;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+
+  &:checked {
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="white" d="M9 16.2l-3.5-3.5 1.4-1.4 2.1 2.1 4.6-4.6 1.4 1.4-6 6z"/></svg>');
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &:indeterminate {
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="2" fill="white"/></svg>');
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+.primary-checkbox:hover {
+  border-color: #9c9c9c;
+}
+
+.primary-checkbox:focus {
+  border-color: #9c9c9c;
+}
+
+.custom-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  position: absolute;
+  z-index: 2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+.custom-menu li {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.custom-menu li:hover {
+  background-color: #f1f1f1;
+}
+
+.menu-trigger-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.action-button {
+  padding: 5px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 5px;
+}
+
+.tick-button {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="green" viewBox="0 0 16 16"%3E%3Cpath d="M13.854 3.646a.5.5 0 0 0-.708 0L6.5 10.293 3.854 7.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7a.5.5 0 0 0 0-.708z"/%3E%3C/svg%3E');
+}
+
+.cross-button {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 16 16"%3E%3Cpath d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/%3E%3C/svg%3E');
+}
+.plus-button {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="green" viewBox="0 0 16 16"%3E%3Cpath d="M8 1a.5.5 0 0 1 .5.5v6h6a.5.5 0 0 1 0 1h-6v6a.5.5 0 0 1-1 0v-6h-6a.5.5 0 0 1 0-1h6v-6A.5.5 0 0 1 8 1z"/%3E%3C/svg%3E');
+
+
+}
+.minus-button{
+  font-size: 30px;
+  color: blue;
+}
+.action-button:hover {
+  opacity: 0.8;
+}
+
+.save-all-button-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.save-all-button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #45a049;
+  }
+}
+
+::ng-deep .page-size-options-dropdown .ng-select-container {
+  height: 25px !important;
+  min-height: 25px !important;
+}
+.add-btn {
+  position: absolute;
+  right: 10px; /* Aligns the button to the right end */
+  top: 10px;   /* Positions the button at the top */
+}
+
+.add-button {
+  border: none;
+  background: none;
+  color: green;
+  cursor: pointer;
+}
+
+.add-btn-text {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  margin-right: 5px; /* Adds some space between the text and the button */
+}
+
+  button {
+    margin: 0 5px; /* Add some space between the buttons */
+    border: none;
+    background: none;
+    color: green;
+    cursor: pointer;
+     
+  }

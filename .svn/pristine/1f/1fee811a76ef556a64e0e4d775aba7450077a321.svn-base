@@ -1,0 +1,36 @@
+<div>
+  <h1>Client Side</h1>
+</div>
+
+<app-list-table [data]="employeeTableDataClient" [columns]="employeeTableColumns" [config]="employeeTableConfigClient"
+  (deletedRow)="handleDeleteRow($event)" (previousPageClick)="handlePreviousPageClick($event)"
+  (nextPageClick)="handleNextPageClick($event)" (checkedRow)="handleCheckedRowClient($event)"
+  (goToPageClick)="handleGoToPage($event)" (pageSizeChange)="onPageSizeChange($event)">
+</app-list-table>
+<br>
+<mat-card class="p-3" *ngIf="checkedRowsClient.length > 0">
+  <h3>Selected Employees</h3>
+  <ol>
+    <li *ngFor="let item of checkedRowsClient;">{{item.name}}</li>
+  </ol>
+</mat-card>
+
+<div>
+  <h1>Server Side</h1>
+</div>
+
+<app-list-table [data]="employeeTableDataServer" [columns]="employeeTableColumns" [config]="employeeTableConfigServer"
+  (deletedRow)="handleDeleteRow($event)" (previousPageClick)="handlePreviousPageClick($event)"
+  (nextPageClick)="handleNextPageClick($event)" (checkedRow)="handleCheckedRowServer($event)"
+  (goToPageClick)="handleGoToPage($event)" (pageSizeChange)="onPageSizeChange($event)">
+</app-list-table>
+<br>
+<mat-card class="p-3" *ngIf="checkedRowsServer.length > 0">
+  <h3>Selected Employees</h3>
+  <ol>
+    <li *ngFor="let item of checkedRowsServer;">{{item.name}}</li>
+  </ol>
+</mat-card>
+
+<!-- <app-home></app-home>
+<app-about></app-about> -->

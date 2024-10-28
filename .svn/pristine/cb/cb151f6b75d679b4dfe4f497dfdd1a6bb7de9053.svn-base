@@ -1,0 +1,7 @@
+<p>about works!</p>
+<button *ngIf="!isBookmarked" mat-button mat-raised-button (click)="toggleBookmark()">
+    <mat-icon>bookmark_border</mat-icon>
+</button>
+<button *ngIf="isBookmarked" mat-button mat-raised-button (click)="toggleBookmark()">
+    <mat-icon>bookmark</mat-icon>
+</button>

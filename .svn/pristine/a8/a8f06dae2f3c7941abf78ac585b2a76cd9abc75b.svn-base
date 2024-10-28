@@ -1,0 +1,70 @@
+import { IListTableColumns } from "../components/list-table/list-table.interface";
+
+export const employeeTableColumns: IListTableColumns[] = [
+  {
+    title: '',
+    bindValue: '',
+    type: 'checkbox',
+    isSelectAll: true, 
+    editable:false,
+    
+  },
+  {
+    title: 'ID',
+    bindValue: 'id',
+    type: 'text',
+    editable:false,
+    
+  },
+  {
+    title: 'Name',
+    bindValue: 'name',
+    type: 'text',
+    editable:true,
+   
+    
+  },
+  {
+    title: 'Designation',
+    bindValue: 'designation',
+    type: 'text',
+    editable:true,
+   
+  },
+  {
+    title: 'Dropdown',
+    bindValue: 'dropdown',
+    type: 'dropdown',
+    editable:true,
+    options: [
+      { value: 'active', label: 'Active' },
+      { value: 'inactive', label: 'Inactive' },
+      { value: 'pending', label: 'Pending' },
+    ],
+   
+  },
+  {
+    title: 'From Date',
+    bindValue: 'fromDate',
+    type: 'date',
+    editable: true,
+  },
+  {
+    title: 'To Date',
+    bindValue: 'toDate',
+    type: 'date',
+    editable: true,
+  },
+  {
+    title: 'Action',
+    bindValue: '',
+    type: 'ellipsis',
+    editable:true,
+    actions:[
+      { label: 'view', icon: 'visibility', action: 'view' },
+      { label: 'Update', icon: 'edit', action: 'update' },
+      { label: 'Delete', icon: 'delete', action: 'delete' },
+    ]
+  },
+  
+]

@@ -1,0 +1,15 @@
+import { IListTableDefaultConfig } from "./list-table.interface";
+
+export const defaultListTableConfig: IListTableDefaultConfig = {
+  header: {
+    display: false,
+    title: 'Table Title',
+  },
+  pagination: {
+    enabled: false,
+    maxPageIndex: 1,
+    pageSize: 10,
+    pageSizeOptions: [],
+  },
+  mode: 'client'
+}

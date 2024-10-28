@@ -1,0 +1,39 @@
+export interface IListTableColumns {
+  title: string;
+  bindValue: string;
+  type: 'text' | 'delete' | 'checkbox' | 'ellipsis' | 'radio' | 'dropdown' | 'date';
+  isSelectAll?: boolean;
+  actions?: IListTableAction[];
+  editable: boolean;
+  options?: { value: string; label: string }[];
+}
+
+export interface IListTableAction {
+  label: string;
+  icon: string;
+  action: 'view' | 'update' | 'delete';
+}
+
+export interface IListTableConfig {
+  header?: ITableHeader;
+  pagination?: IPagination;
+  mode?: 'client' | 'server';
+}
+
+export interface IListTableDefaultConfig extends IListTableConfig {
+  header: ITableHeader;
+  pagination: IPagination;
+  mode: 'client' | 'server';
+}
+
+export interface ITableHeader {
+  display: boolean;
+  title: string;
+}
+
+export interface IPagination {
+  enabled: boolean;
+  // maxPageIndex: number;
+  totalRecords:number;
+  pageSizeOptions: number[];
+}

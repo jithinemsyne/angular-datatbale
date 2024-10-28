@@ -1,0 +1,16 @@
+import { IListTableConfig } from "../components/list-table/list-table.interface";
+
+export const employeeTableConfig: IListTableConfig = {
+  header: {
+    display: true,
+    title: 'List of Customer(s)',
+  },
+  pagination: {
+    enabled: true,
+    maxPageIndex: 1,
+    pageSize: 21,
+    // pageSizeOptions: [4, 6, 8, 10, 15, 20, 50],
+    pageSizeOptions: [5, 10, 15, 20, 50],
+  },
+  mode: 'client'
+}

@@ -1,0 +1,127 @@
+<table>
+  <!-- Table header -->
+  <tr *ngIf="config?.header?.display">
+    <td class="table-header" [colSpan]="columns.length">{{config.header?.title}}</td>
+  </tr>
+
+  <!-- Column header -->
+  <tr *ngIf="data.length > 0" class="column-head">
+    <th *ngFor="let column of columns">
+      <input *ngIf="column.isSelectAll" type="checkbox" class="primary-checkbox"
+        [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"
+        (change)="onSelectAllCheckboxChange()">
+      {{ column.title }}
+    </th>
+  </tr>
+
+  <!-- Main table row content -->
+  <tr *ngFor="let item of tableData; let i=index" class="hover-highlight" (dblclick)="onRowDoubleClick(item, i)">
+    <ng-container *ngFor="let column of columns">
+      <td *ngIf="column.type === 'text'">
+        <span *ngIf="!editRowIndices.includes(i) || !column.editable">{{ item[column.bindValue] }}</span>
+        <input *ngIf="editRowIndices.includes(i) && column.editable" [(ngModel)]="item[column.bindValue]"
+          (keydown)="onKeyDown($event, item,i)" />
+      </td>
+      <td *ngIf="column.type === 'checkbox'">
+        <input type="checkbox" class="primary-checkbox" [checked]="selection.isSelected(item)"
+          (change)="onCheckboxChange($event, item)">
+      </td>
+      <td *ngIf="column.type === 'delete'">
+        <button mat-flat-button (click)="deleteRow(item)">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </td>
+
+      <td *ngIf="column.type === 'radio'">
+        <input type="radio" [(ngModel)]="item[column.bindValue]" [value]="value" *ngFor="let value of column.options" />
+      </td>
+
+      <td *ngIf="column.type === 'dropdown'">
+        <ng-select class="custom" [(ngModel)]="item[column.bindValue]" [items]="column.options ?? []" bindLabel=""
+          bindValue="value"></ng-select>
+      </td>
+
+      <td *ngIf="column.type === 'date'">
+        <span *ngIf="!editRowIndices.includes(i)">{{ formatDate(item[column.bindValue])}}</span>
+        <form *ngIf="editRowIndices.includes(i) && column.editable" class="row row-cols-sm-auto">
+          <input placeholder="yyyy-MM-dd" name="dp" [(ngModel)]="item[column.bindValue]" ngbDatepicker
+            #d="ngbDatepicker" (click)="d.toggle()" />
+        </form>
+      </td>
+
+
+      <!-- ellipsis menu -->
+      <td *ngIf="column.type === 'ellipsis'">
+        <ng-container *ngIf="editRowIndices.includes(i); else ellipsisMenu">
+          <button (click)="saveEdit(item,i)" class="action-button tick-button"></button>
+          <button (click)="cancelEdit(item,i)" class="action-button cross-button"></button>
+        </ng-container>
+        <ng-template #ellipsisMenu>
+          <button (click)="toggleMenu(item)" class="menu-trigger-button">
+            <span class="material-icons">more_horiz</span>
+          </button>
+          <ul *ngIf="item.menuVisible" class="custom-menu">
+            <li *ngFor="let action of column.actions" (click)="handleAction(action,item,i)">
+              <span class="material-icons">{{ action.icon }}</span>
+              <span>{{ action.label }}</span>
+            </li>
+          </ul>
+        </ng-template>
+      </td>
+    </ng-container>
+  </tr>
+
+
+  <!-- Empty row placeholder -->
+  <tr *ngIf="data.length === 0">
+    <td [colSpan]="columns.length" class="text-center no-data">
+      <div>
+        <img src="assets/images/no-data.png" width="80px" alt="No Data Found">
+        <div class="no-data-found">No data found</div>
+      </div>
+    </td>
+  </tr>
+
+
+  <!-- Pagination -->
+  <tr *ngIf="config?.pagination?.enabled" class="no-gap">
+    <td [colSpan]="columns.length" class="table-footer">
+      <div class="d-flex justify-content-between footer margin no-gap">
+        <div *ngIf="config?.mode==='client'" class="align-middle">
+          Showing {{rowStartIndex + 1}} to {{rowEndIndex}} of {{data.length}} entries
+        </div>
+        <div *ngIf="config?.mode==='server'" class="align-middle">
+          Showing {{rowStartIndex + 1}} to {{rowEndIndex}} of {{tableData.length}} entries
+        </div>
+        <div class="d-flex flex-row">
+          <div class="d-flex align-items-center gap-2">
+            <span><label for="entriesPerPage">Show</label></span>
+            <span>
+              <ng-select class="page-size-options-dropdown" [(ngModel)]="pageSize"
+                [items]="config.pagination?.pageSizeOptions ?? []" [clearable]="false"
+                (change)="onPageSizeChange($event)">
+              </ng-select>
+            </span>
+            <span>entries</span>
+          </div>
+          <div class="d-flex flex-row align-items-center">
+            <button class="buttonb" [disabled]="pageNumber <= 1" (click)="previousPage()">&lt;&lt;</button>
+            <button mat-button [disabled]="previousPageDisabled" (click)="previousPage()">&lt;</button>
+            <input class="page-number" [(ngModel)]="pageNumber" (change)="goToPage($event)">
+            <button mat-button [disabled]="nextPageDisabled" (click)="nextPage()">&gt;</button>
+            <button class="buttonb" [disabled]="pageNumber >= maxPageNumber">&gt;&gt;</button>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<div class="save-all-button-container">
+  <button *ngIf="hasEditingRows()" class="buttonb save-all-button" (click)="saveAll()">
+    Save All
+  </button>
+  <button *ngIf="hasEditingRows()" class="buttonb save-all-button ms-3" (click)="cancelAll()">
+    Cancel All
+  </button>
+</div>
